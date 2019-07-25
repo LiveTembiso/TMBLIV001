@@ -8,16 +8,16 @@ Date: 25th July 2019
 """
 
 import RPi.GPIO as GPIO
-from time import sleep
 from gpiozero import LED
-
-led = LED(7)
+from time import sleep
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(7,GPIO.OUT)
 
 def main():
 	print("Hello world")
-	led.on()
+	GPIO.output(7,True)
 	sleep(2)
-	led.off()
+	GPIO.output(7,False)
 	sleep(2)
 
 if __name__ == "__main__":
@@ -31,5 +31,5 @@ if __name__ == "__main__":
 		GPIO.cleanup()
 	except e:
 		GPIO.cleanup()
-		print("Some error occured")
+		print("Some other error occured")
 		print(e.message)
