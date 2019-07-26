@@ -39,7 +39,7 @@ if __name__ == "__main__":
 	try:
 		while True:
 			GPIO.output(7,False)
-			print("counter = ",counter)
+			print("counter = ",bin(counter))
 			sleep(1)
 
 	except KeyboardInterrupt:
