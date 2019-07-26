@@ -17,14 +17,9 @@ GPIO.setup(12,GPIO.IN,pull_up_down = GPIO.PUD_UP)
 GPIO.setup(13,GPIO.OUT)
 GPIO.setup(15,GPIO.OUT)
 counter = 0
-bulb = ""
 
 def main(channel):
 	global counter
-	#global bulb = format(counter,'05b')
-	GPIO.output(7,1)
-	GPIO.output(13,1)
-	GPIO.output(15,1)
 	if channel == 11:
 		if counter < 7:
 			counter += 1
@@ -37,7 +32,6 @@ def main(channel):
 		else:
 			counter = 7
 
-	
 
 GPIO.add_event_detect(11,GPIO.FALLING,callback=main,bouncetime=300)
 GPIO.add_event_detect(12,GPIO.FALLING,callback=main,bouncetime=300)
@@ -46,11 +40,13 @@ if __name__ == "__main__":
 	#GPIO stopped correctly
 	try:
 		while True:
-			GPIO.output(7,False)
-			GPIO.output(13,0)
-			GPIO.output(15,0)
-			print(format(counter,'03b'))
+			leds = format(counter,"03b")
+			GPIO.output(7,int(leds[0]))
+			GPIO.output(13,int(leds[1]))
+			GPIO.output(15,int(leds[2]))
+			print(leds)
 			sleep(1)
+
 	except KeyboardInterrupt:
 		print("Exiting")
 		#Turn off GPIOs
